@@ -1,0 +1,356 @@
+﻿@* @{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>  *@
+@{
+    ViewData["Title"] = "Trang chủ";
+}
+
+<!-- Hero Section -->
+<section class="hero-section py-5 bg-light rounded-3 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h1 class="display-4 fw-bold mb-3">Nâng cao kỹ năng, <span class="text-primary">mở rộng tương lai</span></h1>
+                <p class="lead mb-4">Khám phá hàng trăm khóa học chất lượng cao từ các giảng viên hàng đầu. Học bất cứ lúc nào, bất cứ nơi đâu và nâng cao sự nghiệp của bạn.</p>
+                <div class="d-flex flex-wrap gap-2">
+                    <a asp-controller="DangKyHoc" asp-action="DanhSachKhoaHoc" class="btn btn-primary btn-lg">
+                        <i class="fas fa-book-open me-2"></i>Khám phá khóa học
+                    </a>
+                    <a asp-controller="Account" asp-action="DangKy" class="btn btn-outline-dark btn-lg">
+                        <i class="fas fa-user-plus me-2"></i>Đăng ký ngay
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center">
+                <img src="~/images/hero-image.svg" alt="Học tập trực tuyến" class="img-fluid" style="max-height: 400px;" onerror="this.src='/placeholder.svg?height=400&width=500'; this.onerror=null;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Courses Section -->
+<section class="mb-5">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Khóa học nổi bật</h2>
+            <p class="text-muted">Những khóa học được yêu thích nhất tại Trung tâm</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Course 1 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm hover-shadow">
+                    <img src="~/images/course-web.jpg" class="card-img-top" alt="Lập trình Web Fullstack" style="height: 200px; object-fit: cover;" onerror="this.src='/placeholder.svg?height=200&width=400'; this.onerror=null;">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-primary">Bestseller</span>
+                            <span class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="text-muted ms-1">4.8</span>
+                            </span>
+                        </div>
+                        <h5 class="card-title">Lập trình Web Fullstack</h5>
+                        <p class="card-text text-muted mb-4">Học cách phát triển ứng dụng web từ đầu đến cuối với HTML, CSS, JavaScript, React và Node.js.</p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="fw-bold text-primary">2.500.000₫</span>
+                                <span class="text-decoration-line-through text-muted">3.500.000₫</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Course 2 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm hover-shadow">
+                    <img src="~/images/course-design.jpg" class="card-img-top" alt="Thiết kế đồ họa" style="height: 200px; object-fit: cover;" onerror="this.src='/placeholder.svg?height=200&width=400'; this.onerror=null;">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-success">Mới</span>
+                            <span class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span class="text-muted ms-1">4.0</span>
+                            </span>
+                        </div>
+                        <h5 class="card-title">Thiết kế đồ họa chuyên nghiệp</h5>
+                        <p class="card-text text-muted mb-4">Làm chủ Adobe Photoshop, Illustrator và các công cụ thiết kế đồ họa hiện đại.</p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="fw-bold text-primary">1.800.000₫</span>
+                                <span class="text-decoration-line-through text-muted">2.200.000₫</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Course 3 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 shadow-sm hover-shadow">
+                    <img src="~/images/course-marketing.jpg" class="card-img-top" alt="Digital Marketing" style="height: 200px; object-fit: cover;" onerror="this.src='/placeholder.svg?height=200&width=400'; this.onerror=null;">
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-info">Phổ biến</span>
+                            <span class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="text-muted ms-1">4.9</span>
+                            </span>
+                        </div>
+                        <h5 class="card-title">Digital Marketing Toàn Diện</h5>
+                        <p class="card-text text-muted mb-4">Chiến lược marketing online hiệu quả với SEO, Google Ads, Facebook Ads và Content Marketing.</p>
+                        <div class="mt-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="fw-bold text-primary">2.200.000₫</span>
+                                <span class="text-decoration-line-through text-muted">2.800.000₫</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a asp-controller="KhoaHoc" asp-action="Index" class="btn btn-outline-primary">
+                <i class="fas fa-th-list me-2"></i>Xem tất cả khóa học
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="py-5 bg-light rounded-3 mb-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Tại sao chọn Trung Tâm Đào Tạo?</h2>
+            <p class="text-muted">Chúng tôi cam kết mang đến trải nghiệm học tập tốt nhất cho học viên</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                        <i class="fas fa-chalkboard-teacher fa-2x p-3"></i>
+                    </div>
+                    <h5 class="fw-bold">Giảng viên chất lượng</h5>
+                    <p class="text-muted">Đội ngũ giảng viên giàu kinh nghiệm, chuyên môn cao từ các doanh nghiệp hàng đầu.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                        <i class="fas fa-laptop-code fa-2x p-3"></i>
+                    </div>
+                    <h5 class="fw-bold">Học thực tế</h5>
+                    <p class="text-muted">Chương trình đào tạo gắn liền với thực tiễn, tập trung vào kỹ năng thực hành.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                        <i class="fas fa-certificate fa-2x p-3"></i>
+                    </div>
+                    <h5 class="fw-bold">Chứng chỉ giá trị</h5>
+                    <p class="text-muted">Chứng chỉ được công nhận rộng rãi bởi các doanh nghiệp trong ngành.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="text-center">
+                    <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                        <i class="fas fa-headset fa-2x p-3"></i>
+                    </div>
+                    <h5 class="fw-bold">Hỗ trợ 24/7</h5>
+                    <p class="text-muted">Đội ngũ hỗ trợ luôn sẵn sàng giải đáp mọi thắc mắc của học viên.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="mb-5">
+    <div class="container">
+        <div class="row g-4 text-center">
+            <div class="col-6 col-md-3">
+                <div class="p-4 border rounded shadow-sm">
+                    <div class="display-4 fw-bold text-primary mb-2">50+</div>
+                    <p class="text-muted mb-0">Khóa học</p>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-3">
+                <div class="p-4 border rounded shadow-sm">
+                    <div class="display-4 fw-bold text-primary mb-2">30+</div>
+                    <p class="text-muted mb-0">Giảng viên</p>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-3">
+                <div class="p-4 border rounded shadow-sm">
+                    <div class="display-4 fw-bold text-primary mb-2">5000+</div>
+                    <p class="text-muted mb-0">Học viên</p>
+                </div>
+            </div>
+            
+            <div class="col-6 col-md-3">
+                <div class="p-4 border rounded shadow-sm">
+                    <div class="display-4 fw-bold text-primary mb-2">98%</div>
+                    <p class="text-muted mb-0">Hài lòng</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5 bg-light rounded-3 mb-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Học viên nói gì về chúng tôi</h2>
+            <p class="text-muted">Những đánh giá từ học viên đã tham gia khóa học</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="card-text mb-4">"Khóa học Lập trình Web Fullstack đã giúp tôi từ một người không biết gì về lập trình trở thành một developer chuyên nghiệp. Cảm ơn Trung tâm rất nhiều!"</p>
+                        <div class="d-flex align-items-center">
+                            <img src="~/images/testimonial-1.jpg" alt="Nguyễn Văn A" class="rounded-circle me-3" width="50" height="50" onerror="this.src='/placeholder.svg?height=50&width=50'; this.onerror=null;">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Nguyễn Văn A</h6>
+                                <small class="text-muted">Web Developer tại ABC Company</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="card-text mb-4">"Giảng viên rất nhiệt tình và chuyên nghiệp. Tôi đã học được rất nhiều kiến thức và kỹ năng thiết kế đồ họa mà trước đây chưa từng biết đến."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="~/images/testimonial-2.jpg" alt="Trần Thị B" class="rounded-circle me-3" width="50" height="50" onerror="this.src='/placeholder.svg?height=50&width=50'; this.onerror=null;">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Trần Thị B</h6>
+                                <small class="text-muted">Graphic Designer Freelancer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="mb-3 text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="card-text mb-4">"Khóa học Digital Marketing đã giúp tôi hiểu rõ hơn về cách xây dựng chiến lược marketing online hiệu quả. Kiến thức rất thực tế và áp dụng được ngay."</p>
+                        <div class="d-flex align-items-center">
+                            <img src="~/images/testimonial-3.jpg" alt="Lê Văn C" class="rounded-circle me-3" width="50" height="50" onerror="this.src='/placeholder.svg?height=50&width=50'; this.onerror=null;">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Lê Văn C</h6>
+                                <small class="text-muted">Marketing Manager tại XYZ Corp</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white rounded-3 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <h2 class="fw-bold mb-3">Sẵn sàng nâng cao kỹ năng của bạn?</h2>
+                <p class="lead mb-0">Đăng ký ngay hôm nay để nhận ưu đãi giảm 20% cho khóa học đầu tiên!</p>
+            </div>
+            <div class="col-lg-4 text-lg-end">
+                <a asp-controller="Account" asp-action="DangKy" class="btn btn-light btn-lg">
+                    <i class="fas fa-user-plus me-2"></i>Đăng ký ngay
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Partners Section -->
+<section class="mb-5">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Đối tác của chúng tôi</h2>
+            <p class="text-muted">Những doanh nghiệp tin tưởng và hợp tác cùng Trung tâm</p>
+        </div>
+        
+        <div class="row g-4 align-items-center justify-content-center">
+            <div class="col-4 col-md-2 text-center">
+                <img src="~/images/partner-1.png" alt="Partner 1" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+            </div>
+            <div class="col-4 col-md-2 text-center">
+                <img src="~/images/partner-2.png" alt="Partner 2" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+            </div>
+            <div class="col-4 col-md-2 text-center">
+                <img src="~/images/partner-3.png" alt="Partner 3" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+            </div>
+            <div class="col-4 col-md-2 text-center">
+                <img src="~/images/partner-4.png" alt="Partner 4" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+            </div>
+            <div class="col-4 col-md-2 text-center">
+                <img src="~/images/partner-5.png" alt="Partner 5" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+            </div>
+            <div class="col-4 col-md-2 text-center">
+                <img src="~/images/partner-6.png" alt="Partner 6" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/index.css" />
+}

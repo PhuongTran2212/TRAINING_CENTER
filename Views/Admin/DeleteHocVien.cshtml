@@ -1,0 +1,58 @@
+@model TrungTamDaoTao.Models.HocVien
+
+@{
+    ViewData["Title"] = "Xóa học viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Xác nhận xóa học viên</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        <strong>Cảnh báo:</strong> Bạn có chắc chắn muốn xóa học viên này? Hành động này không thể hoàn tác.
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <h5 class="border-bottom pb-2 mb-3">Thông tin học viên</h5>
+                            <dl class="row">
+                                <dt class="col-sm-4">Họ tên:</dt>
+                                <dd class="col-sm-8">@Model.HoTen</dd>
+                                
+                                <dt class="col-sm-4">Email:</dt>
+                                <dd class="col-sm-8">@Model.Email</dd>
+                                
+                                <dt class="col-sm-4">Ngày sinh:</dt>
+                                <dd class="col-sm-8">@Model.NgaySinh.ToString("dd/MM/yyyy")</dd>
+                                
+                                <dt class="col-sm-4">Số điện thoại:</dt>
+                                <dd class="col-sm-8">@Model.SoDienThoai</dd>
+                                
+                                <dt class="col-sm-4">Tài khoản:</dt>
+                                <dd class="col-sm-8">@Model.TaiKhoan</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    
+                    <form asp-action="DeleteHocVien" method="post">
+                        <input type="hidden" asp-for="HocVienId" />
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="DanhSachHocVien" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash-alt me-2"></i>Xác nhận xóa
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

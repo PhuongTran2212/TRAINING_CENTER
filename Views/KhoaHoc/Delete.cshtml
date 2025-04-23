@@ -1,0 +1,80 @@
+@model TrungTamDaoTao.Models.KhoaHoc
+
+@{
+    ViewData["Title"] = "Xóa khóa học";
+}
+
+<div class="container mt-4">
+    <h2 class="text-danger mb-4">Xác nhận xóa khóa học</h2>
+    
+    <div class="card border-danger mb-4">
+        <div class="card-header bg-danger text-white">
+            <h3>Bạn có chắc chắn muốn xóa khóa học này?</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <dl class="row">
+                        <dt class="col-sm-4">Mã khóa học:</dt>
+                        <dd class="col-sm-8">@Model.KhoaHocId</dd>
+
+                        <dt class="col-sm-4">Tên khóa học:</dt>
+                        <dd class="col-sm-8"><strong>@Model.TenKhoaHoc</strong></dd>
+
+                        <dt class="col-sm-4">Giảng viên:</dt>
+                        <dd class="col-sm-8">@Model.GiangVien</dd>
+
+                        <dt class="col-sm-4">Thời gian khai giảng:</dt>
+                        <dd class="col-sm-8">@Model.ThoiGianKhaiGiang.ToString("dd/MM/yyyy")</dd>
+
+                        <dt class="col-sm-4">Học phí:</dt>
+                        <dd class="col-sm-8">@Model.HocPhi.ToString("#,##0 VNĐ")</dd>
+                    </dl>
+                </div>
+                <div class="col-md-4">
+                    <div class="alert alert-warning">
+                        <p>
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <strong>Cảnh báo:</strong>
+                        </p>
+                        @if (ViewBag.SoLuongDangKy > 0)
+                        {
+                            <p>Hiện có <strong>@ViewBag.SoLuongDangKy học viên</strong> đã đăng ký khóa học này.</p>
+                            <p>Việc xóa sẽ hủy tất cả đăng ký của họ!</p>
+                        }
+                        else
+                        {
+                            <p>Khóa học này chưa có học viên đăng ký.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="KhoaHocId" />
+        <div class="form-group d-flex gap-3">
+            <button type="submit" class="btn btn-danger">
+                <i class="bi bi-trash-fill me-2"></i>Xác nhận xóa
+            </button>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left me-2"></i>Quay lại danh sách
+            </a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Thêm xác nhận bổ sung khi nhấn nút xóa
+            $('form').submit(function (e) {
+                var confirmDelete = confirm('Bạn có chắc chắn muốn xóa khóa học này?');
+                if (!confirmDelete) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}

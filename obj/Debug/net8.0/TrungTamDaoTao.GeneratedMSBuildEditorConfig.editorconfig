@@ -1,0 +1,125 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = TrungTamDaoTao
+build_property.RootNamespace = TrungTamDaoTao
+build_property.ProjectDir = D:\Training\TrungTamDaoTao\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Training\TrungTamDaoTao
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[D:/Training/TrungTamDaoTao/Views/Account/DangKy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxEYW5nS3kuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Account/DangNhap.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxEYW5nTmhhcC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Admin/CreateHocVien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlSG9jVmllbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Admin/DanhSachHocVien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFuaFNhY2hIb2NWaWVuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Admin/DeleteHocVien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGVsZXRlSG9jVmllbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Admin/DetailsHocVien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGV0YWlsc0hvY1ZpZW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Admin/EditHocVien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdEhvY1ZpZW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/DangKyHoc/DanhSachKhoaHoc.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFuZ0t5SG9jXERhbmhTYWNoS2hvYUhvYy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/DangKyHoc/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFuZ0t5SG9jXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/KhoaHoc/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/KhoaHoc/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/KhoaHoc/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/KhoaHoc/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/KhoaHoc/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/KhoaHoc/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2hvYUhvY1xfVmFsaWRhdGlvblNjcmlwdHNQYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Shared/_Notifications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYXRpb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Shared/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WaWV3U3RhcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Training/TrungTamDaoTao/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-aicd92lv0c

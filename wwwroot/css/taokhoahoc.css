@@ -1,0 +1,257 @@
+/* Định dạng chung - Tone cam đen */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* Tiêu đề trang */
+h2 {
+    color: #222;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    border-left: 4px solid #ff6b00;
+    padding-left: 10px;
+}
+
+hr {
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Form container */
+.row {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+/* Form elements */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    transition: border-color 0.15s ease-in-out;
+    padding: 10px 12px;
+}
+
+.form-control:focus {
+    border-color: #ff8c38;
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 0, 0.25);
+}
+
+/* Labels */
+.control-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #333;
+    display: block;
+}
+
+/* Validation messages */
+.text-danger {
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+/* Buttons */
+.btn {
+    padding: 8px 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: #ff6b00;
+    border-color: #ff6b00;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #e65c00;
+    border-color: #d65500;
+}
+
+.btn-secondary {
+    background-color: #333333;
+    border-color: #333333;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: #222222;
+    border-color: #1a1a1a;
+}
+
+/* Buttons trong bảng dữ liệu */
+.btn-info {
+    background-color: #ff8c38;
+    border-color: #ff8c38;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background-color: #ff7e1f;
+    border-color: #ff7410;
+}
+
+.btn-warning {
+    background-color: #ffac38;
+    border-color: #ffac38;
+    color: #222;
+}
+
+.btn-warning:hover {
+    background-color: #ff9e19;
+    border-color: #ff9600;
+}
+
+.btn-danger {
+    background-color: #333;
+    border-color: #333;
+}
+
+.btn-danger:hover {
+    background-color: #222;
+    border-color: #111;
+}
+
+/* Table styling */
+.table-dark {
+    background-color: #222;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(255, 107, 0, 0.05);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(255, 107, 0, 0.1);
+}
+
+/* Alert messages */
+.alert-success {
+    background-color: #ffefdc;
+    border-color: #ffdcb9;
+    color: #663c00;
+}
+
+.alert-info {
+    background-color: #f0f0f0;
+    border-color: #e0e0e0;
+    color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .col-md-8 {
+        padding: 0 15px;
+    }
+    
+    .form-control {
+        font-size: 16px; /* Prevents zoom on mobile */
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .btn-secondary {
+        margin-left: 0;
+    }
+}
+
+/* Input date styling */
+input[type="date"] {
+    height: 42px;
+}
+
+/* Form validation styling */
+.input-validation-error {
+    border-color: #dc3545;
+}
+
+.field-validation-error {
+    color: #dc3545;
+}
+
+/* Animation for form submission */
+@keyframes submitPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.btn-primary:active {
+    animation: submitPulse 0.3s;
+}
+
+/* Additional table styling */
+.table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+/* Mobile responsive table */
+@media (max-width: 768px) {
+    .table-responsive {
+        border: 0;
+        box-shadow: none;
+    }
+    
+    .table thead {
+        display: none;
+    }
+    
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+    
+    .table tr {
+        margin-bottom: 15px;
+        border: 1px solid #e9ecef;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    .table td {
+        text-align: right;
+        padding-left: 50% !important;
+        position: relative;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    .table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        width: 45%;
+        font-weight: 600;
+        text-align: left;
+    }
+    
+    .table td:last-child {
+        border-bottom: 0;
+    }
+}

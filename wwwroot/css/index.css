@@ -1,0 +1,201 @@
+
+:root {
+    --primary-color: #FF6600; /* Main orange */
+    --primary-dark: #E65C00;  /* Darker orange for hover states */
+    --primary-light: #FF8533; /* Lighter orange for backgrounds */
+    --dark-color: #222222;    /* Off-black for text */
+    --gray-dark: #444444;     /* Dark gray for secondary text */
+    --gray-light: #F5F5F5;    /* Light gray for backgrounds */
+    --white: #FFFFFF;
+    }
+    
+    /* Global Styles */
+    body {
+    color: var(--dark-color);
+    }
+    
+    a {
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+    }
+    
+    a:hover {
+    color: var(--primary-dark);
+    text-decoration: none;
+    }
+    
+    /* Override Bootstrap Primary Colors */
+    .bg-primary {
+    background-color: var(--primary-color) !important;
+    }
+    
+    .bg-light {
+    background-color: var(--gray-light) !important;
+    }
+    
+    .text-primary {
+    color: var(--primary-color) !important;
+    }
+    
+    .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    }
+    
+    .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    }
+    
+    .btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    }
+    
+    .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white);
+    }
+    
+    /* Hero Section */
+    .hero-section {
+    background: linear-gradient(135deg, var(--gray-light) 0%, #E8E8E8 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .hero-section h1 .text-primary {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Featured Courses Section */
+    .card {
+    border: none;
+    transition: all 0.3s ease;
+    }
+    
+    .badge.bg-primary {
+    background-color: var(--primary-color) !important;
+    }
+    
+    .badge.bg-success {
+    background-color: #28a745 !important;
+    }
+    
+    .badge.bg-info {
+    background-color: #0dcaf0 !important;
+    }
+    
+    /* Star Ratings */
+    .text-warning {
+    color: #FFC107 !important; /* Golden yellow for star ratings */
+    }
+    
+    /* Feature Icons */
+    .feature-icon.bg-primary {
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.2);
+    }
+    
+    /* Statistics Section */
+    .display-4.text-primary {
+    color: var(--primary-color) !important;
+    font-weight: bold;
+    }
+    
+    .border.rounded {
+    transition: transform 0.3s ease;
+    }
+    
+    .border.rounded:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Testimonials Section */
+    .card.border-0 {
+    background-color: var(--white);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* CTA Section */
+    .bg-primary.text-white {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+    }
+    
+    .btn-light {
+    color: var(--primary-color);
+    background-color: var(--white);
+    border-color: var(--white);
+    }
+    
+    .btn-light:hover {
+    color: var(--primary-dark);
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+    }
+    
+    /* Partners Section */
+    .partners img {
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    }
+    
+    .partners img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    }
+    
+    /* Enhanced Hover Effects */
+    .hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Course Cards */
+    .card-img-top {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    }
+    
+    /* Custom Button Styles */
+    .btn {
+    border-radius: 4px;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+    }
+    
+    .btn-lg {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    }
+    
+    /* Responsive Typography */
+    @media (max-width: 768px) {
+    .display-4 {
+    font-size: 2.5rem;
+    }
+    
+    .lead {
+    font-size: 1rem;
+    }
+    }
+    .feature-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
+    }
+    
+    .hover-shadow {
+        transition: all 0.3s ease;
+    }
+    
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+    }
+    

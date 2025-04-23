@@ -1,0 +1,541 @@
+﻿@* <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Trung Tâm Đào Tạo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TrungTamDaoTao.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-graduation-cap me-2"></i> Trung Tâm Đào Tạo
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i> Trang chủ
+                            </a>
+                        </li>
+                        
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="KhoaHoc" asp-action="Index">
+                                    <i class="fas fa-book me-1"></i> Khóa học
+                                </a>
+                            </li>
+                            
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-cogs me-1"></i> Quản trị
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="Index">Tổng quan</a></li>
+                                    <li><a class="dropdown-item" asp-controller="KhoaHoc" asp-action="Create">Tạo khóa học mới</a></li>
+                                    <li><a class="dropdown-item" asp-controller="KhoaHoc" asp-action="QuanLy">Quản lý khóa học</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="QuanLyNguoiDung">Quản lý người dùng</a></li>
+                                </ul>
+                            </li>
+                        }
+                        
+                        @if (User.Identity.IsAuthenticated && !User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dangKyDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-clipboard-list me-1"></i> Đăng ký học
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dangKyDropdown">
+                                    <li><a class="dropdown-item" asp-controller="DangKyHoc" asp-action="Index">Khóa học đã đăng ký</a></li>
+                                    <li><a class="dropdown-item" asp-controller="DangKyHoc" asp-action="DanhSachKhoaHoc">Đăng ký khóa học mới</a></li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                <img src="/api/placeholder/24/24" alt="Avatar" class="rounded-circle me-1" />
+                                @User.Identity.Name
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="fas fa-user me-2"></i> Hồ sơ cá nhân</a></li>
+                                
+                                @if (!User.IsInRole("Admin"))
+                                {
+                                    <li><a class="dropdown-item" asp-controller="DangKyHoc" asp-action="Index"><i class="fas fa-book-open me-2"></i> Khóa học của tôi</a></li>
+                                }
+                                
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Settings"><i class="fas fa-cog me-2"></i> Cài đặt</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li>
+                                    <form asp-controller="Account" asp-action="DangXuat" method="post">
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex">
+                            <a asp-controller="Account" asp-action="DangNhap" class="btn btn-outline-light me-2">
+                                <i class="fas fa-sign-in-alt me-1"></i> Đăng nhập
+                            </a>
+                            <a asp-controller="Account" asp-action="DangKy" class="btn btn-warning">
+                                <i class="fas fa-user-plus me-1"></i> Đăng ký
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container my-4">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    
+    <footer class="bg-light py-4">
+        <div class="container">
+            <div class="row text-muted">
+                <div class="col-md-4">
+                    <h5>Trung Tâm Đào Tạo</h5>
+                    <p>Nâng cao kiến thức, phát triển kỹ năng và đạt được mục tiêu nghề nghiệp của bạn với các khóa học chất lượng cao từ chúng tôi.</p>
+                    <div>
+                        <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liên kết nhanh</h5>
+                    <ul class="list-unstyled">
+                        <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a asp-controller="KhoaHoc" asp-action="Index">Khóa học</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-controller="DangKyHoc" asp-action="DanhSachKhoaHoc">Đăng ký học</a></li>
+                        }
+                        <li><a asp-controller="Home" asp-action="LienHe">Liên hệ</a></li>
+                        <li><a asp-controller="Home" asp-action="Privacy">Chính sách bảo mật</a></li>
+                        <li><a asp-controller="Home" asp-action="DieuKhoan">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Thông tin liên hệ</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>123 Đường ABC, Quận XYZ, Hà Nội</p>
+                    <p><i class="fas fa-phone me-2"></i>(024) 1234 5678</p>
+                    <p><i class="fas fa-envelope me-2"></i>info@trungtamdaotao.edu.vn</p>
+                </div>
+            </div>
+            <hr />
+            <div class="text-center text-muted">&copy; 2025 - Trung Tâm Đào Tạo - Mọi quyền được bảo lưu</div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html> *@
+@* //chucnanghocvien *@
+@* <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Trung Tâm Đào Tạo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TrungTamDaoTao.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-graduation-cap me-2"></i> Trung Tâm Đào Tạo
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i> Trang chủ
+                            </a>
+                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="dangKyDropdown" role="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-clipboard-list me-1"></i> Đăng ký học
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dangKyDropdown">
+                                    <li><a class="dropdown-item" asp-controller="DangKyHoc" asp-action="Index">Khóa học đã đăng ký</a></li>
+                                    <li><a class="dropdown-item" asp-controller="DangKyHoc" asp-action="DanhSachKhoaHoc">Đăng ký khóa học mới</a></li>
+                                </ul>
+                            </li>
+                
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="GiangVien">
+                                <i class="fas fa-chalkboard-teacher me-1"></i> Giảng viên
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="LienHe">
+                                <i class="fas fa-envelope me-1"></i> Liên hệ
+                            </a>
+                        </li>
+                    </ul>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                <img src="/api/placeholder/24/24" alt="Avatar" class="rounded-circle me-1" />
+                                @User.Identity.Name
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="fas fa-user me-2"></i> Hồ sơ cá nhân</a></li>
+                                <li><a class="dropdown-item" asp-controller="DangKyHoc" asp-action="Index"><i class="fas fa-book-open me-2"></i> Khóa học của tôi</a></li>
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Settings"><i class="fas fa-cog me-2"></i> Cài đặt</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li>
+                                    <form asp-controller="Account" asp-action="DangXuat" method="post">
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex">
+                            <a asp-controller="Account" asp-action="DangNhap" class="btn btn-outline-light me-2">
+                                <i class="fas fa-sign-in-alt me-1"></i> Đăng nhập
+                            </a>
+                            <a asp-controller="Account" asp-action="DangKy" class="btn btn-warning">
+                                <i class="fas fa-user-plus me-1"></i> Đăng ký
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container my-4">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    
+    <footer class="bg-light py-4">
+        <div class="container">
+            <div class="row text-muted">
+                <div class="col-md-4">
+                    <h5>Trung Tâm Đào Tạo</h5>
+                    <p>Nâng cao kiến thức, phát triển kỹ năng và đạt được mục tiêu nghề nghiệp của bạn với các khóa học chất lượng cao từ chúng tôi.</p>
+                    <div>
+                        <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liên kết nhanh</h5>
+                    <ul class="list-unstyled">
+                        <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                        <li><a asp-controller="KhoaHoc" asp-action="Index">Khóa học</a></li>
+                        <li><a asp-controller="Home" asp-action="GiangVien">Giảng viên</a></li>
+                        <li><a asp-controller="Home" asp-action="LienHe">Liên hệ</a></li>
+                        <li><a asp-controller="Home" asp-action="Privacy">Chính sách bảo mật</a></li>
+                        <li><a asp-controller="Home" asp-action="DieuKhoan">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Thông tin liên hệ</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>123 Đường ABC, Quận XYZ, Hà Nội</p>
+                    <p><i class="fas fa-phone me-2"></i>(024) 1234 5678</p>
+                    <p><i class="fas fa-envelope me-2"></i>info@trungtamdaotao.edu.vn</p>
+                </div>
+            </div>
+            <hr />
+            <div class="text-center text-muted">&copy; 2025 - Trung Tâm Đào Tạo - Mọi quyền được bảo lưu</div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html> *@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Trung Tâm Đào Tạo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TrungTamDaoTao.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-graduation-cap me-2"></i> Trung Tâm Đào Tạo
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        @* <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i> Trang chủ
+                            </a>
+                        </li> *@
+                        
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Admin" asp-action="Index">
+                                        <i class="fas fa-tachometer-alt me-1"></i> Trang quản trị
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="quanlyDropdown" role="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-tasks me-1"></i> Quản lý khóa học
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="quanlyDropdown">
+                                        <li><a class="dropdown-item" asp-controller="KhoaHoc" asp-action="Index">Danh sách khóa học</a></li>
+                                        <li><a class="dropdown-item" asp-controller="KhoaHoc" asp-action="Create">Thêm khóa học mới</a></li>
+                                        <li><a class="dropdown-item" asp-controller="KhoaHoc" asp-action="Details">Xem chi tiết khóa học</a></li>
+                                        <li><a class="dropdown-item" asp-controller="KhoaHoc" asp-action="Edit">Sửa khóa học</a></li>
+                                        <li><a class="dropdown-item" asp-controller="KhoaHoc" asp-action="Delete">Xóa khóa học</a></li>
+                                        
+                                    </ul>
+                                </li>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="hocVienDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-users me-1"></i> Quản lý học viên
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="hocVienDropdown">
+        <li>
+            <a class="dropdown-item" asp-controller="Admin" asp-action="DanhSachHocVien">
+                <i class="fas fa-list me-1"></i> Danh sách học viên
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Admin" asp-action="CreateHocVien">
+                <i class="fas fa-user-plus me-1"></i> Thêm học viên
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Admin" asp-action="DetailsHocVien">
+                <i class="fas fa-user-plus me-1"></i> Chi tiết học viên
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Admin" asp-action="EditHocVien">
+                <i class="fas fa-user-plus me-1"></i> Sửa học viên
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="Admin" asp-action="DeleteHocVien">
+                <i class="fas fa-user-plus me-1"></i> Xóa học viên
+            </a>
+        </li>
+    </ul>
+</li>
+                                
+                                @* <li class="nav-item">
+                                    <a class="nav-link" asp-controller="HocVien" asp-action="Index">
+                                        <i class="fas fa-users me-1"></i> Quản lý học viên
+                                    </a>
+                                </li> *@
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="ThongKe" asp-action="Index">
+                                        <i class="fas fa-chart-bar me-1"></i> Thống kê
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home me-1"></i> Trang chủ
+                            </a>
+                        </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="dangKyDropdown" role="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-clipboard-list me-1"></i> Đăng ký học
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dangKyDropdown">
+                                        <li><a class="dropdown-item" asp-controller="DangKyHoc" asp-action="Index">Khóa học đã đăng ký</a></li>
+                                        <li><a class="dropdown-item" asp-controller="DangKyHoc" asp-action="DanhSachKhoaHoc">Đăng ký khóa học mới</a></li>
+                                    </ul>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="GiangVien">
+                                        <i class="fas fa-chalkboard-teacher me-1"></i> Giảng viên
+                                    </a>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Home" asp-action="LienHe">
+                                        <i class="fas fa-envelope me-1"></i> Liên hệ
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                <img src="/api/placeholder/24/24" alt="Avatar" class="rounded-circle me-1" />
+                                @User.Identity.Name
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Profile"><i class="fas fa-user me-2"></i> Hồ sơ cá nhân</a></li>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li><a class="dropdown-item" asp-controller="Admin" asp-action="Index"><i class="fas fa-tachometer-alt me-2"></i> Trang quản trị</a></li>
+                                }
+                                else
+                                {
+                                    <li><a class="dropdown-item" asp-controller="DangKyHoc" asp-action="Index"><i class="fas fa-book-open me-2"></i> Khóa học của tôi</a></li>
+                                }
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Settings"><i class="fas fa-cog me-2"></i> Cài đặt</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li>
+                                    <form asp-controller="Account" asp-action="DangXuat" method="post">
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="fas fa-sign-out-alt me-2"></i> Đăng xuất
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex">
+                            <a asp-controller="Account" asp-action="DangNhap" class="btn btn-outline-light me-2">
+                                <i class="fas fa-sign-in-alt me-1"></i> Đăng nhập
+                            </a>
+                            <a asp-controller="Account" asp-action="DangKy" class="btn btn-warning">
+                                <i class="fas fa-user-plus me-1"></i> Đăng ký
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container my-4">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    
+    <footer class="bg-light py-4">
+        <div class="container">
+            <div class="row text-muted">
+                <div class="col-md-4">
+                    <h5>Trung Tâm Đào Tạo</h5>
+                    <p>Nâng cao kiến thức, phát triển kỹ năng và đạt được mục tiêu nghề nghiệp của bạn với các khóa học chất lượng cao từ chúng tôi.</p>
+                    <div>
+                        <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h5>Liên kết nhanh</h5>
+                    <ul class="list-unstyled">
+                        @* <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li> *@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li><a asp-controller="Admin" asp-action="Index">Trang quản trị</a></li>
+                                <li><a asp-controller="KhoaHoc" asp-action="Index">Quản lý khóa học</a></li>
+                                <li><a asp-controller="Admin" asp-action="Index">Quản lý học viên</a></li>
+                                <li><a asp-controller="ThongKe" asp-action="Index">Thống kê</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                                <li><a asp-controller="DangKyHoc" asp-action="DanhSachKhoaHoc">Đăng ký khóa học</a></li>
+                                <li><a asp-controller="Home" asp-action="GiangVien">Giảng viên</a></li>
+                                <li><a asp-controller="Home" asp-action="LienHe">Liên hệ</a></li>
+                            }
+                        }
+                        <li><a asp-controller="Home" asp-action="Privacy">Chính sách bảo mật</a></li>
+                        <li><a asp-controller="Home" asp-action="DieuKhoan">Điều khoản sử dụng</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Thông tin liên hệ</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>123 Đường ABC, Quận XYZ, Hà Nội</p>
+                    <p><i class="fas fa-phone me-2"></i>(024) 1234 5678</p>
+                    <p><i class="fas fa-envelope me-2"></i>info@trungtamdaotao.edu.vn</p>
+                </div>
+            </div>
+            <hr />
+            <div class="text-center text-muted">&copy; 2025 - Trung Tâm Đào Tạo - Mọi quyền được bảo lưu</div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

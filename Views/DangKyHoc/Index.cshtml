@@ -1,0 +1,113 @@
+@model IEnumerable<TrungTamDaoTao.Models.DangKyHoc>
+@{
+    ViewData["Title"] = "Khóa học đã đăng ký";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex align-items-center justify-content-between">
+        <h5 class="m-0 font-weight-bold text-primary">
+            <i class="fas fa-clipboard-list me-2"></i> Khóa học đã đăng ký
+        </h5>
+        <a asp-action="DanhSachKhoaHoc" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i> Đăng ký khóa học mới
+        </a>
+    </div>
+    <div class="card-body">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle me-2"></i> @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @if (Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Tên khóa học</th>
+                            <th>Giảng viên</th>
+                            <th>Thời gian khai giảng</th>
+                            <th>Học phí</th>
+                            <th>Ngày đăng ký</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.KhoaHoc.TenKhoaHoc</td>
+                                <td>@item.KhoaHoc.GiangVien</td>
+                                <td>@item.KhoaHoc.ThoiGianKhaiGiang.ToString("dd/MM/yyyy")</td>
+                                <td>@item.KhoaHoc.HocPhi.ToString("N0") VNĐ</td>
+                                <td>@item.NgayDangKy.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>
+                                    @if (DateTime.Now < item.KhoaHoc.NgayBatDau)
+                                    {
+                                        <span class="badge bg-warning">Chưa bắt đầu</span>
+                                    }
+                                    else if (DateTime.Now > item.KhoaHoc.NgayKetThuc)
+                                    {
+                                        <span class="badge bg-secondary">Đã kết thúc</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">Đang diễn ra</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="ChiTiet" asp-route-id="@item.KhoaHocId" class="btn btn-sm btn-info">
+                                        <i class="fas fa-info-circle"></i> Chi tiết
+                                    </a>
+                                    @if (DateTime.Now < item.KhoaHoc.ThoiGianKhaiGiang)
+                                    {
+                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#huyDangKyModal-@item.KhoaHocId">
+                                            <i class="fas fa-trash-alt"></i> Hủy đăng ký
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="huyDangKyModal-@item.KhoaHocId" tabindex="-1" aria-labelledby="huyDangKyModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="huyDangKyModalLabel">Xác nhận hủy đăng ký</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Bạn có chắc chắn muốn hủy đăng ký khóa học <strong>@item.KhoaHoc.TenKhoaHoc</strong>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy bỏ</button>
+                                                        <form asp-action="HuyDangKy" asp-route-id="@item.KhoaHocId" method="post">
+                                                            @Html.AntiForgeryToken()
+                                                            <button type="submit" class="btn btn-danger">Xác nhận hủy</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center p-4">
+                <img src="/api/placeholder/120/120" alt="No courses" class="mb-3" />
+                <h5>Bạn chưa đăng ký khóa học nào</h5>
+                <p class="text-muted">Hãy khám phá các khóa học hiện có và đăng ký ngay!</p>
+                <a asp-action="DanhSachKhoaHoc" class="btn btn-primary mt-2">
+                    <i class="fas fa-search me-1"></i> Tìm khóa học
+                </a>
+            </div>
+        }
+    </div>
+</div>

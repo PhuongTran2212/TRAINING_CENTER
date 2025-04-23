@@ -1,0 +1,11 @@
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+    // Tự động ẩn thông báo thành công sau 5 giây
+    $(document).ready(function () {
+        setTimeout(function () {
+            $(".alert-success").alert('close');
+        }, 5000);
+    });
+</script>
