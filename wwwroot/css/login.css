@@ -1,0 +1,125 @@
+.login-container {
+  animation: fadeIn 0.8s ease;
+}
+
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background-color: #fff9f5; /* Nền cam nhạt pastel */
+}
+
+.card:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+}
+
+/* Header màu cam pastel đậm */
+.card-header {
+  background-color: #ff9a6e; /* Màu cam pastel đậm */
+  color: #333333;
+  text-align: center;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-header h2 {
+  position: relative;
+  z-index: 1;
+  font-weight: 500;
+}
+
+/* Phần nội dung form */
+.card-body {
+  padding: 1.75rem;
+  background-color: #fff9f5; /* Nền cam nhạt pastel */
+}
+
+.form-control {
+  border-radius: 10px;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid #ffccb3; /* Viền cam nhạt */
+  background-color: #ffffff;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 2px rgba(255, 154, 110, 0.25);
+  border-color: #ff9a6e;
+}
+
+/* Nút đăng nhập màu đen pastel */
+.btn-primary {
+  background-color: #3d3d3d; /* Màu đen pastel */
+  border: none;
+  border-radius: 10px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #4e4e4e; /* Màu đen pastel nhạt hơn khi hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Link màu cam */
+.text-center a {
+  color: #ff8552; /* Màu cam */
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.text-center a:hover {
+  color: #e66f3e; /* Màu cam đậm hơn khi hover */
+  text-decoration: underline;
+}
+
+/* Checkbox và label */
+.checkbox label {
+  cursor: pointer;
+  user-select: none;
+  color: #333333; /* Màu đen cho text */
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: middle;
+  accent-color: #ff8552; /* Đổi màu checkbox thành cam */
+}
+
+/* Footer card */
+.card-footer {
+  background-color: #fff9f5; /* Nền cam nhạt pastel */
+  border-top: 1px solid #ffccb3;
+  padding: 1.25rem;
+}
+
+/* Form group spacing */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+label {
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 0.5rem;
+}
+
+/* Định nghĩa biến màu chính */
+:root {
+  --orange-main: #ff8552; /* Màu cam chính */
+  --orange-light: #ff9a6e; /* Màu cam nhạt */
+  --orange-pastel: #ffccb3; /* Màu cam pastel */
+  --orange-bg: #fff9f5; /* Màu nền cam rất nhạt */
+  --black-main: #3d3d3d; /* Màu đen chính */
+  --black-light: #4e4e4e; /* Màu đen nhạt */
+  --text-color: #333333; /* Màu chữ */
+}

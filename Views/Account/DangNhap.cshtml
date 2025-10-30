@@ -23,13 +23,13 @@
                         <input asp-for="MatKhau" class="form-control" />
                         <span asp-validation-for="MatKhau" class="text-danger"></span>
                     </div>
-                    <div class="form-group mb-3">
+                    @* <div class="form-group mb-3">
                         <div class="checkbox">
                             <label>
                                 <input asp-for="RememberMe" /> @Html.CheckBoxFor(model => model.RememberMe)
                             </label>
                         </div>
-                    </div>
+                    </div> *@
                     <div class="form-group mb-3">
                         <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
                     </div>
@@ -45,6 +45,44 @@
     </div>
 </div>
 
+
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        // Thêm hiệu ứng cho form đăng nhập
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hiệu ứng xuất hiện cho form
+            const loginCard = document.querySelector('.login-card');
+            loginCard.classList.add('animate-fadeIn');
+            
+            // Hiệu ứng cho các trường input
+            const inputs = document.querySelectorAll('.form-control');
+            inputs.forEach((input, index) => {
+                input.style.opacity = '0';
+                input.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    input.style.transition = 'all 0.5s ease';
+                    input.style.opacity = '1';
+                    input.style.transform = 'translateY(0)';
+                }, 200 * (index + 1));
+            });
+            
+            // Hiệu ứng cho nút đăng nhập
+            const loginBtn = document.querySelector('.login-btn');
+            loginBtn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+                this.style.boxShadow = '0 5px 15px rgba(83, 72, 89, 0.3)';
+            });
+            
+            loginBtn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+        });
+    </script>
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/login.css" />
 }

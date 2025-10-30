@@ -1,0 +1,223 @@
+@model TrungTamDaoTao.ViewModels.ThongKeViewModel
+
+@{
+    ViewData["Title"] = "Thống kê";
+}
+
+<h1>Thống kê doanh thu</h1>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Lọc theo thời gian</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Index" method="get">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Từ ngày</label>
+                            <input type="date" name="tuNgay" class="form-control" value="@(Model.TuNgay?.ToString("yyyy-MM-dd"))" />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Đến ngày</label>
+                            <input type="date" name="denNgay" class="form-control" value="@(Model.DenNgay?.ToString("yyyy-MM-dd"))" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Lọc</button>
+                            <a asp-action="DoanhThuTheoThang" class="btn btn-info ms-2">Xem theo tháng</a>
+                            <a asp-action="SoLuongHocVien" class="btn btn-success ms-2">Xem số lượng học viên</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Thống kê doanh thu theo khóa học</h5>
+                <h6>Từ ngày: @Model.TuNgay?.ToString("dd/MM/yyyy") - Đến ngày: @Model.DenNgay?.ToString("dd/MM/yyyy")</h6>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Mã khóa học</th>
+                            <th>Tên khóa học</th>
+                            <th>Giảng viên</th>
+                            <th>Học phí</th>
+                            <th>Số lượng học viên</th>
+                            <th>Doanh thu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ThongKeKhoaHocs)
+                        {
+                            <tr>
+                                <td>@item.KhoaHoc.KhoaHocId</td>
+                                <td>@item.KhoaHoc.TenKhoaHoc</td>
+                                <td>@item.KhoaHoc.GiangVien</td>
+                                <td>@item.KhoaHoc.HocPhi.ToString("N0") VNĐ</td>
+                                <td>@item.SoLuongHocVien</td>
+                                <td>@item.DoanhThu.ToString("N0") VNĐ</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="4">Tổng cộng</th>
+                            <th>@Model.ThongKeKhoaHocs.Sum(t => t.SoLuongHocVien)</th>
+                            <th>@Model.TongDoanhThu.ToString("N0") VNĐ</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Biểu đồ doanh thu theo khóa học</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="doanhThuChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* <div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Biểu đồ cột chồng thể hiện số lượng học viên và doanh thu</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="stackedBarChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div> *@
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const courseNames = [@Html.Raw(string.Join(",", Model.ThongKeKhoaHocs.Select(t => $"'{t.KhoaHoc.TenKhoaHoc}'")))];
+            const revenueData = [@string.Join(",", Model.ThongKeKhoaHocs.Select(t => t.DoanhThu))];
+            const studentCounts = [@string.Join(",", Model.ThongKeKhoaHocs.Select(t => t.SoLuongHocVien))];
+            
+            // Bar chart for revenue
+            var ctxBar = document.getElementById('doanhThuChart').getContext('2d');
+            var barChart = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: courseNames,
+                    datasets: [{
+                        label: 'Doanh thu (VNĐ)',
+                        data: revenueData,
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Biểu đồ cột thể hiện doanh thu theo khóa học',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Stacked bar chart for revenue and student count
+            var ctxStacked = document.getElementById('stackedBarChart').getContext('2d');
+            
+            // Calculate max values to set appropriate scales
+            const maxRevenue = Math.max(...revenueData);
+            const maxStudents = Math.max(...studentCounts);
+            const scaleFactor = Math.ceil(maxRevenue / maxStudents / 100) * 100;
+            
+            var stackedChart = new Chart(ctxStacked, {
+                type: 'bar',
+                data: {
+                    labels: courseNames,
+                    datasets: [
+                        {
+                            label: 'Số lượng học viên',
+                            data: studentCounts,
+                            backgroundColor: 'rgba(75, 192, 192, 0.7)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                            order: 2
+                        },
+                        {
+                            label: 'Doanh thu (VNĐ ÷ ' + scaleFactor + ')',
+                            data: revenueData.map(value => value / scaleFactor),
+                            backgroundColor: 'rgba(255, 159, 64, 0.7)',
+                            borderColor: 'rgba(255, 159, 64, 1)',
+                            borderWidth: 1,
+                            order: 1
+                        }
+                    ]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            stacked: false
+                        },
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'So sánh số lượng học viên và doanh thu theo khóa học',
+                            font: {
+                                size: 16
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.datasetIndex === 1) {
+                                        label += (context.raw * scaleFactor).toLocaleString('vi-VN') + ' VNĐ';
+                                    } else {
+                                        label += context.raw;
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

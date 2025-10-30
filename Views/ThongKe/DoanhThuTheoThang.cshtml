@@ -1,0 +1,180 @@
+@{
+    ViewData["Title"] = "Doanh thu theo tháng";
+    var nam = ViewBag.Nam;
+    var doanhThuTheoThang = ViewBag.DoanhThuTheoThang as decimal[];
+}
+
+<h1>Thống kê doanh thu theo tháng - Năm @nam</h1>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Chọn năm</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="DoanhThuTheoThang" method="get" class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Năm</label>
+                        <select name="nam" class="form-select">
+                            @for (int i = DateTime.Now.Year - 5; i <= DateTime.Now.Year; i++)
+                            {
+                                if (i == nam)
+                                {
+                                    <option value="@i" selected>@i</option>
+                                }
+                                else
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary">Xem</button>
+                        <a asp-action="Index" class="btn btn-secondary ms-2">Quay lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Doanh thu theo tháng - Năm @nam</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tháng</th>
+                            <th>Doanh thu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < 12; i++)
+                        {
+                            <tr>
+                                <td>Tháng @(i + 1)</td>
+                                <td>@doanhThuTheoThang[i].ToString("N0") VNĐ</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Tổng cộng</th>
+                            <th>@doanhThuTheoThang.Sum().ToString("N0") VNĐ</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Biểu đồ doanh thu theo tháng - Năm @nam</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="doanhThuThangChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Biểu đồ miền doanh thu theo tháng - Năm @nam</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="doanhThuAreaChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Months labels
+            const months = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+            const revenueData = [@string.Join(",", doanhThuTheoThang)];
+            
+            // Line chart
+            var ctxLine = document.getElementById('doanhThuThangChart').getContext('2d');
+            var lineChart = new Chart(ctxLine, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'Doanh thu (VNĐ)',
+                        data: revenueData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Biểu đồ đường thể hiện doanh thu theo tháng',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Area chart
+            var ctxArea = document.getElementById('doanhThuAreaChart').getContext('2d');
+            var areaChart = new Chart(ctxArea, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'Doanh thu (VNĐ)',
+                        data: revenueData,
+                        backgroundColor: 'rgba(54, 162, 235, 0.4)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Biểu đồ miền thể hiện doanh thu theo tháng',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

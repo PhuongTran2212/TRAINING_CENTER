@@ -1,0 +1,164 @@
+@{
+    ViewData["Title"] = "Số lượng học viên theo khóa học";
+    var tenKhoaHocs = ViewBag.TenKhoaHocs as List<string>;
+    var soLuongHocViens = ViewBag.SoLuongHocViens as List<int>;
+}
+
+<h1>Thống kê số lượng học viên theo khóa học</h1>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Số lượng học viên theo khóa học</h5>
+            </div>
+            <div class="card-body">
+                <a asp-action="Index" class="btn btn-secondary mb-3">Quay lại</a>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tên khóa học</th>
+                            <th>Số lượng học viên</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < tenKhoaHocs.Count; i++)
+                        {
+                            <tr>
+                                <td>@tenKhoaHocs[i]</td>
+                                <td>@soLuongHocViens[i]</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Tổng cộng</th>
+                            <th>@soLuongHocViens.Sum()</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Biểu đồ số lượng học viên theo khóa học</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="soLuongHocVienChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Biểu đồ cột số lượng học viên theo khóa học</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="soLuongHocVienBarChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const courseNames = [@Html.Raw(string.Join(",", tenKhoaHocs.Select(t => $"'{t}'")))];
+            const studentCounts = [@string.Join(",", soLuongHocViens)];
+            
+            // Generate dynamic colors
+            function generateColors(count) {
+                const colors = [];
+                const backgroundColors = [];
+                
+                for (let i = 0; i < count; i++) {
+                    const r = Math.floor(Math.random() * 255);
+                    const g = Math.floor(Math.random() * 255);
+                    const b = Math.floor(Math.random() * 255);
+                    
+                    backgroundColors.push(`rgba(${r}, ${g}, ${b}, 0.5)`);
+                    colors.push(`rgba(${r}, ${g}, ${b}, 1)`);
+                }
+                
+                return { backgroundColors, borderColors: colors };
+            }
+            
+            const { backgroundColors, borderColors } = generateColors(courseNames.length);
+            
+            // Pie chart
+            var ctxPie = document.getElementById('soLuongHocVienChart').getContext('2d');
+            var pieChart = new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: courseNames,
+                    datasets: [{
+                        label: 'Số lượng học viên',
+                        data: studentCounts,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Biểu đồ tròn thể hiện số lượng học viên theo khóa học',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // Bar chart
+            var ctxBar = document.getElementById('soLuongHocVienBarChart').getContext('2d');
+            var barChart = new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: courseNames,
+                    datasets: [{
+                        label: 'Số lượng học viên',
+                        data: studentCounts,
+                        backgroundColor: backgroundColors,
+                        borderColor: borderColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Biểu đồ cột thể hiện số lượng học viên theo khóa học',
+                            font: {
+                                size: 16
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

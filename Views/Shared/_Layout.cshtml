@@ -342,7 +342,7 @@
                                     </a>
                                 </li>
                                 
-                                <li class="nav-item dropdown">
+                                @* <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="quanlyDropdown" role="button" data-bs-toggle="dropdown">
                                         <i class="fas fa-tasks me-1"></i> Quản lý khóa học
                                     </a>
@@ -354,7 +354,62 @@
                                         <li><a class="dropdown-item" asp-controller="KhoaHoc" asp-action="Delete">Xóa khóa học</a></li>
                                         
                                     </ul>
-                                </li>
+                                </li> *@
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="quanlyDropdown" role="button" data-bs-toggle="dropdown">
+        <i class="fas fa-book-open me-1"></i> Quản lý khóa học
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="quanlyDropdown">
+        <li>
+            <a class="dropdown-item" asp-controller="KhoaHoc" asp-action="Index">
+                <i class="fas fa-list me-2"></i> Danh sách khóa học
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" asp-controller="KhoaHoc" asp-action="Create">
+                <i class="fas fa-plus-circle me-2"></i> Thêm khóa học mới
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="javascript:void(0)" onclick="chonKhoaHocDetails()">
+                <i class="fas fa-info-circle me-2"></i> Xem chi tiết khóa học
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="javascript:void(0)" onclick="chonKhoaHocEdit()">
+                <i class="fas fa-edit me-2"></i> Sửa khóa học
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="javascript:void(0)" onclick="chonKhoaHocDelete()">
+                <i class="fas fa-trash-alt me-2"></i> Xóa khóa học
+            </a>
+        </li>
+    </ul>
+</li>
+
+<script>
+    function chonKhoaHocDetails() {
+        var id = prompt("Nhập ID khóa học cần xem chi tiết:");
+        if (id !== null && id !== "" && !isNaN(id)) {
+            window.location.href = "/KhoaHoc/Details/" + id;
+        }
+    }
+    
+    function chonKhoaHocEdit() {
+        var id = prompt("Nhập ID khóa học cần sửa:");
+        if (id !== null && id !== "" && !isNaN(id)) {
+            window.location.href = "/KhoaHoc/Edit/" + id;
+        }
+    }
+    
+    function chonKhoaHocDelete() {
+        var id = prompt("Nhập ID khóa học cần xóa:");
+        if (id !== null && id !== "" && !isNaN(id)) {
+            window.location.href = "/KhoaHoc/Delete/" + id;
+        }
+    }
+</script>
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="hocVienDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fas fa-users me-1"></i> Quản lý học viên
@@ -394,10 +449,27 @@
                                     </a>
                                 </li> *@
                                 
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="ThongKe" asp-action="Index">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="thongKeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fas fa-chart-bar me-1"></i> Thống kê
                                     </a>
+                                    <ul class="dropdown-menu" aria-labelledby="thongKeDropdown">
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="ThongKe" asp-action="Index">
+                                                <i class="fas fa-chart-line me-1"></i> Doanh thu theo khóa học
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="ThongKe" asp-action="DoanhThuTheoThang">
+                                                <i class="fas fa-calendar-alt me-1"></i> Doanh thu theo tháng
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="ThongKe" asp-action="SoLuongHocVien">
+                                                <i class="fas fa-users me-1"></i> Số lượng học viên
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             }
                             else
@@ -409,7 +481,7 @@
                         </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="dangKyDropdown" role="button" data-bs-toggle="dropdown">
-                                        <i class="fas fa-clipboard-list me-1"></i> Đăng ký học
+                                        <i class="fas fa-clipboard-list me-1"></i> Khóa học
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="dangKyDropdown">
                                         <li><a class="dropdown-item" asp-controller="DangKyHoc" asp-action="Index">Khóa học đã đăng ký</a></li>
@@ -417,7 +489,7 @@
                                     </ul>
                                 </li>
                                 
-                                <li class="nav-item">
+                                @* <li class="nav-item">
                                     <a class="nav-link" asp-controller="Home" asp-action="GiangVien">
                                         <i class="fas fa-chalkboard-teacher me-1"></i> Giảng viên
                                     </a>
@@ -427,7 +499,7 @@
                                     <a class="nav-link" asp-controller="Home" asp-action="LienHe">
                                         <i class="fas fa-envelope me-1"></i> Liên hệ
                                     </a>
-                                </li>
+                                </li> *@
                             }
                         }
                     </ul>

@@ -362,11 +362,6 @@ public async Task<IActionResult> DetailsHocVien(int? id)
 
     return View(hocVien);
 }
-        // GET: /Admin/ThongKe
-        public IActionResult ThongKe()
-        {
-            return View();
-        }
 
         // GET: /Admin/CauHinh
         public IActionResult CauHinh()

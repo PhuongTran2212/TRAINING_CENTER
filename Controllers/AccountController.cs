@@ -104,69 +104,7 @@ public async Task<IActionResult> DangNhap(DangNhapViewModel model, string return
 
     return View(model);
 }
-// [HttpPost]
-// [ValidateAntiForgeryToken]
-// public async Task<IActionResult> DangNhap(DangNhapViewModel model, string returnUrl = null)
-// {
-//     ViewData["ReturnUrl"] = returnUrl;
 
-//     if (ModelState.IsValid)
-//     {
-//         // --- 1. Kiểm tra tài khoản admin từ appsettings.json ---
-//         var adminTaiKhoan = _configuration["AdminAccount:TaiKhoan"];
-//         var adminMatKhau = _configuration["AdminAccount:MatKhau"];
-//         var adminHoTen = _configuration["AdminAccount:HoTen"];
-
-//         if (model.TaiKhoan == adminTaiKhoan && model.MatKhau == adminMatKhau)
-//         {
-//             var claims = new List<Claim>
-//             {
-//                 new Claim(ClaimTypes.Name, adminHoTen),
-//                 new Claim(ClaimTypes.NameIdentifier, "admin"),
-//                 new Claim(ClaimTypes.Role, "Admin")
-//             };
-
-//             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-//             await HttpContext.SignInAsync(
-//                 CookieAuthenticationDefaults.AuthenticationScheme,
-//                 new ClaimsPrincipal(claimsIdentity));
-
-//             return RedirectToAction("Index", "Admin"); // Chuyển tới trang admin
-//         }
-
-//         // --- 2. Kiểm tra tài khoản học viên trong database ---
-//         var hocVien = await _context.HocViens
-//             .FirstOrDefaultAsync(h => h.TaiKhoan == model.TaiKhoan);
-
-//         if (hocVien != null && hocVien.MatKhau == model.MatKhau)
-//         {
-//             var claims = new List<Claim>
-//             {
-//                 new Claim(ClaimTypes.Name, hocVien.HoTen),
-//                 new Claim(ClaimTypes.NameIdentifier, hocVien.HocVienId.ToString()),
-//                 new Claim(ClaimTypes.Role, "HocVien")
-//             };
-
-//             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-//             await HttpContext.SignInAsync(
-//                 CookieAuthenticationDefaults.AuthenticationScheme,
-//                 new ClaimsPrincipal(claimsIdentity));
-
-//             if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
-//             {
-//                 return Redirect(returnUrl);
-//             }
-
-//             return RedirectToAction("Index", "Home");
-//         }
-
-//         ModelState.AddModelError(string.Empty, "Tài khoản hoặc mật khẩu không đúng");
-//     }
-
-//     return View(model);
-// }
         // GET: /Account/DangKy
         public IActionResult DangKy()
         {
@@ -235,3 +173,66 @@ public async Task<IActionResult> DangNhap(DangNhapViewModel model, string return
         }
     }
 }
+// [HttpPost]
+// [ValidateAntiForgeryToken]
+// public async Task<IActionResult> DangNhap(DangNhapViewModel model, string returnUrl = null)
+// {
+//     ViewData["ReturnUrl"] = returnUrl;
+
+//     if (ModelState.IsValid)
+//     {
+//         // --- 1. Kiểm tra tài khoản admin từ appsettings.json ---
+//         var adminTaiKhoan = _configuration["AdminAccount:TaiKhoan"];
+//         var adminMatKhau = _configuration["AdminAccount:MatKhau"];
+//         var adminHoTen = _configuration["AdminAccount:HoTen"];
+
+//         if (model.TaiKhoan == adminTaiKhoan && model.MatKhau == adminMatKhau)
+//         {
+//             var claims = new List<Claim>
+//             {
+//                 new Claim(ClaimTypes.Name, adminHoTen),
+//                 new Claim(ClaimTypes.NameIdentifier, "admin"),
+//                 new Claim(ClaimTypes.Role, "Admin")
+//             };
+
+//             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+//             await HttpContext.SignInAsync(
+//                 CookieAuthenticationDefaults.AuthenticationScheme,
+//                 new ClaimsPrincipal(claimsIdentity));
+
+//             return RedirectToAction("Index", "Admin"); // Chuyển tới trang admin
+//         }
+
+//         // --- 2. Kiểm tra tài khoản học viên trong database ---
+//         var hocVien = await _context.HocViens
+//             .FirstOrDefaultAsync(h => h.TaiKhoan == model.TaiKhoan);
+
+//         if (hocVien != null && hocVien.MatKhau == model.MatKhau)
+//         {
+//             var claims = new List<Claim>
+//             {
+//                 new Claim(ClaimTypes.Name, hocVien.HoTen),
+//                 new Claim(ClaimTypes.NameIdentifier, hocVien.HocVienId.ToString()),
+//                 new Claim(ClaimTypes.Role, "HocVien")
+//             };
+
+//             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+//             await HttpContext.SignInAsync(
+//                 CookieAuthenticationDefaults.AuthenticationScheme,
+//                 new ClaimsPrincipal(claimsIdentity));
+
+//             if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+//             {
+//                 return Redirect(returnUrl);
+//             }
+
+//             return RedirectToAction("Index", "Home");
+//         }
+
+//         ModelState.AddModelError(string.Empty, "Tài khoản hoặc mật khẩu không đúng");
+//     }
+
+//     return View(model);
+// }

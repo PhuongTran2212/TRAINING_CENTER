@@ -6,33 +6,31 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>  *@
+@model IEnumerable<TrungTamDaoTao.ViewModels.DangKyHocViewModel>
 @{
     ViewData["Title"] = "Trang chủ";
 }
-
-<!-- Hero Section -->
 <section class="hero-section py-5 bg-light rounded-3 mb-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0">
                 <h1 class="display-4 fw-bold mb-3">Nâng cao kỹ năng, <span class="text-primary">mở rộng tương lai</span></h1>
                 <p class="lead mb-4">Khám phá hàng trăm khóa học chất lượng cao từ các giảng viên hàng đầu. Học bất cứ lúc nào, bất cứ nơi đâu và nâng cao sự nghiệp của bạn.</p>
-                <div class="d-flex flex-wrap gap-2">
+                @* <div class="d-flex flex-wrap gap-2">
                     <a asp-controller="DangKyHoc" asp-action="DanhSachKhoaHoc" class="btn btn-primary btn-lg">
                         <i class="fas fa-book-open me-2"></i>Khám phá khóa học
                     </a>
                     <a asp-controller="Account" asp-action="DangKy" class="btn btn-outline-dark btn-lg">
                         <i class="fas fa-user-plus me-2"></i>Đăng ký ngay
                     </a>
-                </div>
+                </div> *@
             </div>
             <div class="col-lg-6 text-center">
-                <img src="~/images/hero-image.svg" alt="Học tập trực tuyến" class="img-fluid" style="max-height: 400px;" onerror="this.src='/placeholder.svg?height=400&width=500'; this.onerror=null;">
+                <img src="~/images/index.jpg" alt="Học tập trực tuyến" class="img-fluid" style="max-height: 400px;" onerror="this.src='/placeholder.svg?height=400&width=500'; this.onerror=null;">
             </div>
         </div>
     </div>
 </section>
-
 <!-- Featured Courses Section -->
 <section class="mb-5">
     <div class="container">
@@ -40,102 +38,103 @@
             <h2 class="fw-bold">Khóa học nổi bật</h2>
             <p class="text-muted">Những khóa học được yêu thích nhất tại Trung tâm</p>
         </div>
-        
         <div class="row g-4">
-            <!-- Course 1 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm hover-shadow">
-                    <img src="~/images/course-web.jpg" class="card-img-top" alt="Lập trình Web Fullstack" style="height: 200px; object-fit: cover;" onerror="this.src='/placeholder.svg?height=200&width=400'; this.onerror=null;">
-                    <div class="card-body d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge bg-primary">Bestseller</span>
-                            <span class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <span class="text-muted ms-1">4.8</span>
-                            </span>
-                        </div>
-                        <h5 class="card-title">Lập trình Web Fullstack</h5>
-                        <p class="card-text text-muted mb-4">Học cách phát triển ứng dụng web từ đầu đến cuối với HTML, CSS, JavaScript, React và Node.js.</p>
-                        <div class="mt-auto">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="fw-bold text-primary">2.500.000₫</span>
-                                <span class="text-decoration-line-through text-muted">3.500.000₫</span>
+            @if (Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm hover-shadow @(item.SoLuongConLai <= 0 ? "bg-light" : "")">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="card-title mb-0">@item.KhoaHoc.TenKhoaHoc</h5>
                             </div>
-                            <a href="#" class="btn btn-outline-primary w-100">Xem chi tiết</a>
+                            <div class="card-body d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    @if (item.SoLuongConLai <= 3 && item.SoLuongConLai > 0)
+                                    {
+                                        <span class="badge bg-warning">Còn @item.SoLuongConLai chỗ</span>
+                                    }
+                                    else if (item.SoLuongConLai <= 0)
+                                    {
+                                        <span class="badge bg-danger">Hết chỗ</span>
+                                    }
+                                    else 
+                                    {
+                                        <span class="badge bg-success">Còn trống</span>
+                                    }
+                                </div>
+                                <p class="mb-1"><i class="fas fa-user me-2"></i> <strong>Giảng viên:</strong> @item.KhoaHoc.GiangVien</p>
+                                <p class="mb-1"><i class="fas fa-calendar-alt me-2"></i> <strong>Khai giảng:</strong> @item.KhoaHoc.ThoiGianKhaiGiang.ToString("dd/MM/yyyy")</p>
+                                <p class="mb-1"><i class="fas fa-clock me-2"></i> <strong>Thời gian:</strong> @item.KhoaHoc.NgayBatDau.ToString("dd/MM/yyyy") - @item.KhoaHoc.NgayKetThuc.ToString("dd/MM/yyyy")</p>
+                                
+                                <div class="progress mt-3 mb-2">
+                                    @{
+                                        int phanTramDangKy = item.KhoaHoc.SoLuongToiDa > 0 ? (int)((double)item.SoLuongDaDangKy / item.KhoaHoc.SoLuongToiDa * 100) : 0;
+                                        string progressColorClass = phanTramDangKy >= 80 ? "bg-danger" : (phanTramDangKy >= 50 ? "bg-warning" : "bg-success");
+                                    }
+                                    <div class="progress-bar @progressColorClass" role="progressbar" style="width: @phanTramDangKy%" 
+                                         aria-valuenow="@phanTramDangKy" aria-valuemin="0" aria-valuemax="100">@phanTramDangKy%</div>
+                                </div>
+                                <p class="small text-muted mb-3">
+                                    <i class="fas fa-users me-1"></i> @item.SoLuongDaDangKy/@item.KhoaHoc.SoLuongToiDa học viên đăng ký
+                                </p>
+                                
+                                <div class="mt-auto">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="fw-bold text-primary">@item.KhoaHoc.HocPhi.ToString("N0")₫</span>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        @* <a asp-controller="KhoaHoc" asp-action="ChiTiet" asp-route-id="@item.KhoaHoc.KhoaHocId" class="btn btn-outline-info flex-grow-1">
+                                            <i class="fas fa-info-circle me-1"></i> Chi tiết
+                                        </a> *@
+                                        
+                                        @if (item.DaDangKy)
+                                        {
+                                            <button class="btn btn-success flex-grow-1" disabled>
+                                                <i class="fas fa-check-circle me-1"></i> Đã đăng ký
+                                            </button>
+                                        }
+else if (item.SoLuongConLai > 0)
+{
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a asp-controller="KhoaHoc" asp-action="DangKy" asp-route-id="@item.KhoaHoc.KhoaHocId" class="btn btn-primary flex-grow-1">
+            <i class="fas fa-sign-in-alt me-1"></i> Đăng ký
+        </a>
+    }
+    else
+    {
+        <a href="javascript:void(0)" onclick="showLoginRequiredMessage('@item.KhoaHoc.KhoaHocId')" class="btn btn-primary flex-grow-1">
+            <i class="fas fa-sign-in-alt me-1"></i> Đăng ký
+        </a>
+    }
+}
+                                        else
+                                        {
+                                            <button class="btn btn-secondary flex-grow-1" disabled>
+                                                <i class="fas fa-ban me-1"></i> Đã đầy
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Course 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm hover-shadow">
-                    <img src="~/images/course-design.jpg" class="card-img-top" alt="Thiết kế đồ họa" style="height: 200px; object-fit: cover;" onerror="this.src='/placeholder.svg?height=200&width=400'; this.onerror=null;">
-                    <div class="card-body d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge bg-success">Mới</span>
-                            <span class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
-                                <span class="text-muted ms-1">4.0</span>
-                            </span>
-                        </div>
-                        <h5 class="card-title">Thiết kế đồ họa chuyên nghiệp</h5>
-                        <p class="card-text text-muted mb-4">Làm chủ Adobe Photoshop, Illustrator và các công cụ thiết kế đồ họa hiện đại.</p>
-                        <div class="mt-auto">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="fw-bold text-primary">1.800.000₫</span>
-                                <span class="text-decoration-line-through text-muted">2.200.000₫</span>
-                            </div>
-                            <a href="#" class="btn btn-outline-primary w-100">Xem chi tiết</a>
-                        </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center">
+                    <div class="p-5">
+                        <img src="/api/placeholder/120/120" alt="No courses" class="mb-3" />
+                        <h5>Không có khóa học nào</h5>
+                        <p class="text-muted">Hiện tại chưa có khóa học nào được mở. Vui lòng quay lại sau.</p>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Course 3 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card h-100 shadow-sm hover-shadow">
-                    <img src="~/images/course-marketing.jpg" class="card-img-top" alt="Digital Marketing" style="height: 200px; object-fit: cover;" onerror="this.src='/placeholder.svg?height=200&width=400'; this.onerror=null;">
-                    <div class="card-body d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge bg-info">Phổ biến</span>
-                            <span class="text-warning">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span class="text-muted ms-1">4.9</span>
-                            </span>
-                        </div>
-                        <h5 class="card-title">Digital Marketing Toàn Diện</h5>
-                        <p class="card-text text-muted mb-4">Chiến lược marketing online hiệu quả với SEO, Google Ads, Facebook Ads và Content Marketing.</p>
-                        <div class="mt-auto">
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <span class="fw-bold text-primary">2.200.000₫</span>
-                                <span class="text-decoration-line-through text-muted">2.800.000₫</span>
-                            </div>
-                            <a href="#" class="btn btn-outline-primary w-100">Xem chi tiết</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-4">
-            <a asp-controller="KhoaHoc" asp-action="Index" class="btn btn-outline-primary">
-                <i class="fas fa-th-list me-2"></i>Xem tất cả khóa học
-            </a>
+            }
         </div>
     </div>
+    
 </section>
 
 <!-- Why Choose Us Section -->
@@ -330,22 +329,22 @@
         
         <div class="row g-4 align-items-center justify-content-center">
             <div class="col-4 col-md-2 text-center">
-                <img src="~/images/partner-1.png" alt="Partner 1" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+                <img src="~/images/dn1.jpg" alt="Partner 1" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
             </div>
             <div class="col-4 col-md-2 text-center">
-                <img src="~/images/partner-2.png" alt="Partner 2" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+                <img src="~/images/dn2.jpg" alt="Partner 2" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
             </div>
             <div class="col-4 col-md-2 text-center">
-                <img src="~/images/partner-3.png" alt="Partner 3" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+                <img src="~/images/dn3.jpg" alt="Partner 3" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
             </div>
             <div class="col-4 col-md-2 text-center">
-                <img src="~/images/partner-4.png" alt="Partner 4" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+                <img src="~/images/dn4.jpg" alt="Partner 4" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
             </div>
             <div class="col-4 col-md-2 text-center">
-                <img src="~/images/partner-5.png" alt="Partner 5" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+                <img src="~/images/dn5.jpg" alt="Partner 5" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
             </div>
             <div class="col-4 col-md-2 text-center">
-                <img src="~/images/partner-6.png" alt="Partner 6" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
+                <img src="~/images/dn6.jpg" alt="Partner 6" class="img-fluid" style="max-height: 60px;" onerror="this.src='/placeholder.svg?height=60&width=120'; this.onerror=null;">
             </div>
         </div>
     </div>
@@ -353,4 +352,50 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/index.css" />
+}
+@section Scripts {
+    <script>
+// Function to show login required message
+function showLoginRequiredMessage(khoaHocId) {
+  var loginUrl = "/Account/DangNhap"
+  var dangKyUrl = "/KhoaHoc/DangKy"
+
+  // Tạo modal với màu sắc mới
+  var modalHtml = `
+    <div class="modal fade" id="loginRequiredModal" tabindex="-1" aria-labelledby="loginRequiredModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="loginRequiredModalLabel">Thông báo</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center mb-3">
+              <i class="fas fa-exclamation-circle fa-3x"></i>
+            </div>
+            <p class="text-center">Bạn phải đăng nhập để đăng ký khóa học này!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Đóng</button>
+            <a href="${loginUrl}?returnUrl=${dangKyUrl}?id=${khoaHocId}" class="btn btn-primary">
+              <i class="fas fa-sign-in-alt me-1"></i> Đăng nhập ngay
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>`
+
+  // Thêm modal vào body
+  document.body.insertAdjacentHTML("beforeend", modalHtml)
+
+  // Hiển thị modal
+  var modal = new bootstrap.Modal(document.getElementById("loginRequiredModal"))
+  modal.show()
+
+  // Xóa modal sau khi ẩn
+  document.getElementById("loginRequiredModal").addEventListener("hidden.bs.modal", function () {
+    this.remove()
+  })
+        }
+    </script>
 }

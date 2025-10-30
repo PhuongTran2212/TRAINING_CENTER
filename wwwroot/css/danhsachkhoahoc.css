@@ -1,0 +1,240 @@
+/* CSS cho trang đăng ký khóa học - Phiên bản cam pastel */
+
+/* Màu sắc chính */
+:root {
+  --primary: #f3703c;       /* Cam đậm */
+  --secondary: #ff9b6b;     /* Cam nhạt */
+  --light: #fff2e9;         /* Cam pastel rất nhạt */
+  --accent: #ffd4c2;        /* Cam pastel */
+  --text-primary: #59453b;  /* Nâu đậm */
+  --text-light: #fff2e9;    /* Cam pastel rất nhạt */
+}
+
+/* Card styling */
+.card {
+  border-radius: 15px;
+  overflow: hidden;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(243, 112, 60, 0.15) !important;
+}
+
+.card-header {
+  padding: 1rem;
+  border-bottom: none;
+}
+
+/* Màu cho card header */
+.card-header.bg-primary {
+  background: linear-gradient(135deg, #f3703c 0%, #ff9b6b 100%) !important;
+  color: var(--light) !important;
+}
+
+/* Màu cho text-primary */
+.text-primary {
+  color: var(--primary) !important;
+}
+
+/* Màu cho các nút */
+.btn-primary {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: white !important;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #e05f29 !important;
+  border-color: #e05f29 !important;
+  box-shadow: 0 0 0 0.25rem rgba(243, 112, 60, 0.25) !important;
+}
+
+.btn-info {
+  background-color: #ff9b6b !important;
+  border-color: #ff9b6b !important;
+  color: var(--text-primary) !important;
+}
+
+.btn-info:hover {
+  background-color: #ff8952 !important;
+  border-color: #ff8952 !important;
+}
+
+.btn-danger {
+  background-color: #ff6b6b !important;
+  border-color: #ff6b6b !important;
+}
+
+.btn-danger:hover {
+  background-color: #ff5252 !important;
+  border-color: #ff5252 !important;
+}
+
+.btn-success {
+  background-color: #76c893 !important;
+  border-color: #76c893 !important;
+}
+
+.btn-success:hover {
+  background-color: #52b69a !important;
+  border-color: #52b69a !important;
+}
+
+.btn-secondary {
+  background-color: #d9c5b4 !important;
+  border-color: #d9c5b4 !important;
+}
+
+.btn-secondary:hover {
+  background-color: #cdb5a0 !important;
+  border-color: #cdb5a0 !important;
+}
+
+/* Màu cho progress bar */
+.progress {
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #fff2e9;
+}
+
+.progress-bar.bg-success {
+  background-color: #76c893 !important;
+}
+
+.progress-bar.bg-warning {
+  background-color: #ffd166 !important;
+}
+
+.progress-bar.bg-danger {
+  background-color: #ff9b6b !important;
+}
+
+/* Màu cho badge */
+.badge.bg-warning {
+  background-color: #ffd166 !important;
+  color: var(--text-primary);
+}
+
+.badge.bg-danger {
+  background-color: #ff9b6b !important;
+  color: var(--text-primary);
+}
+
+.badge.bg-success {
+  background-color: #76c893 !important;
+  color: white;
+}
+
+/* Màu cho alert */
+.alert-success {
+  background-color: #e0f5e9 !important;
+  border-color: #c8edd8 !important;
+  color: #2a6a48 !important;
+}
+
+.alert-danger {
+  background-color: #ffede7 !important;
+  border-color: #ffdfd5 !important;
+  color: #cc5c2d !important;
+}
+
+/* Modal styling */
+.modal-content {
+  border-radius: 15px;
+  overflow: hidden;
+  border: none;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #f3703c 0%, #ff9b6b 100%) !important;
+  border-bottom: none;
+  color: var(--light);
+}
+
+.modal-header h5 {
+  color: var(--light);
+  font-weight: 600;
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.modal-footer {
+  border-top: none;
+  padding: 1rem 2rem 2rem;
+}
+
+/* Animation for cards */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.col-lg-4.col-md-6.mb-4 {
+  animation: fadeIn 0.5s ease-out forwards;
+  animation-delay: calc(var(--animation-order) * 0.1s);
+}
+
+/* Thêm animation order cho các card */
+.col-lg-4:nth-child(1) {
+  --animation-order: 1;
+}
+.col-lg-4:nth-child(2) {
+  --animation-order: 2;
+}
+.col-lg-4:nth-child(3) {
+  --animation-order: 3;
+}
+.col-lg-4:nth-child(4) {
+  --animation-order: 4;
+}
+.col-lg-4:nth-child(5) {
+  --animation-order: 5;
+}
+.col-lg-4:nth-child(6) {
+  --animation-order: 6;
+}
+.col-lg-4:nth-child(7) {
+  --animation-order: 7;
+}
+.col-lg-4:nth-child(8) {
+  --animation-order: 8;
+}
+.col-lg-4:nth-child(9) {
+  --animation-order: 9;
+}
+
+/* Màu cho các icon */
+.fas {
+  color: inherit;
+}
+
+/* Màu cho card khi hết chỗ */
+.card.bg-light {
+  background-color: var(--light) !important;
+  opacity: 0.8;
+}
+
+/* Màu cho nút đóng trong alert */
+.btn-close {
+  opacity: 0.8;
+}
+
+/* Màu cho phần không có khóa học */
+.text-muted {
+  color: #b29e8e !important;
+}

@@ -1,0 +1,222 @@
+:root {
+    --primary-color: #4E54C8; /* Màu tím chính */
+    --primary-dark: #3943AA;  /* Màu tím đậm cho hover states */
+    --primary-light: #8A8EDB; /* Màu tím nhạt cho backgrounds */
+    --secondary-color: #00E5FF; /* Màu xanh ngọc làm điểm nhấn */
+    --dark-color: #222222;    /* Off-black cho text */
+    --gray-dark: #444444;     /* Dark gray cho secondary text */
+    --gray-light: #F6F9FD;    /* Light blue-gray cho backgrounds */
+    --white: #FFFFFF;
+}
+
+/* Global Styles */
+body {
+    color: var(--dark-color);
+}
+
+a {
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--primary-dark);
+    text-decoration: none;
+}
+
+/* Override Bootstrap Primary Colors */
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.bg-light {
+    background-color: var(--gray-light) !important;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--white);
+}
+
+/* Các màu cho badge */
+.badge.bg-success {
+    background-color: #2DD4BF !important; /* Xanh ngọc thay xanh lá */
+}
+
+.badge.bg-warning {
+    background-color: #FFC53D !important; /* Vàng nổi bật hơn */
+}
+
+.badge.bg-danger {
+    background-color: #F87171 !important; /* Đỏ nhạt */
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--gray-light) 0%, #EAEFFD 100%);
+    box-shadow: 0 4px 15px rgba(78, 84, 200, 0.1);
+}
+
+.hero-section h1 .text-primary {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Featured Courses Section */
+.card {
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.badge.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.badge.bg-info {
+    background-color: var(--secondary-color) !important;
+}
+
+/* Progress bars */
+.progress-bar.bg-success {
+    background-color: #2DD4BF !important;
+}
+
+.progress-bar.bg-warning {
+    background-color: #FFC53D !important;
+}
+
+.progress-bar.bg-danger {
+    background-color: #F87171 !important;
+}
+
+/* Star Ratings */
+.text-warning {
+    color: #FBBF24 !important; /* Vàng đậm cho star ratings */
+}
+
+/* Feature Icons */
+.feature-icon.bg-primary {
+    background-color: var(--primary-color) !important;
+    box-shadow: 0 5px 15px rgba(78, 84, 200, 0.2);
+}
+
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+}
+
+/* Statistics Section */
+.display-4.text-primary {
+    color: var(--primary-color) !important;
+    font-weight: bold;
+}
+
+.border.rounded {
+    transition: transform 0.3s ease;
+    border-color: #E2E8F0 !important;
+}
+
+.border.rounded:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(78, 84, 200, 0.15);
+}
+
+/* Testimonials Section */
+.card.border-0 {
+    background-color: var(--white);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* CTA Section */
+.bg-primary.text-white {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%) !important;
+}
+
+.btn-light {
+    color: var(--primary-color);
+    background-color: var(--white);
+    border-color: var(--white);
+}
+
+.btn-light:hover {
+    color: var(--primary-dark);
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+/* Button outline info */
+.btn-outline-info {
+    color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-outline-info:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--dark-color);
+}
+
+/* Enhanced Hover Effects */
+.hover-shadow:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(78, 84, 200, 0.15) !important;
+}
+
+/* Course Cards */
+.card-img-top {
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+}
+
+/* Custom Button Styles */
+.btn {
+    border-radius: 4px;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-lg {
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+}
+
+/* Responsive Typography */
+@media (max-width: 768px) {
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .lead {
+        font-size: 1rem;
+    }
+}
