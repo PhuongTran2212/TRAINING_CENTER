@@ -25,15 +25,16 @@ The system is divided into functionalities for different user roles.
 
 | Feature Description | Screenshot |
 | :--- | :--- |
-| **Image 1:** *[Your feature description, e.g., User Dashboard Home]* | `./README_IMG/anh1.png` |
-| **Image 8:** *[Your feature description, e.g., Course Enrollment Page (User)]* | `./README_IMG/anh8.png` |
-| **Image 9:** *[Your feature description, e.g., My Registered Courses Page (User)]* | `./README_IMG/anh9.png` |
-| **Image 2:** *[Your feature description, e.g., Course Management Page (CRUD)]* | `./README_IMG/anh2.png` |
-| **Image 3:** *[Your feature description, e.g., Student Roster Page]* | `./README_IMG/anh3.png` |
-| **Image 4:** *[Your feature description, e.g., Monthly Revenue Statistics Chart]* | `./README_IMG/anh4.png` |
-| **Image 5:** *[Your feature description, e.g., Edit Student Details Form]* | `./README_IMG/anh5.png` |
-| **Image 6:** *[Your feature description, e.g., Course Enrollment List]* | `./README_IMG/anh6.png` |
-| **Image 7:** *[Your feature description, e.g., Monthly Revenue Statistics Chart]* | `./README_IMG/anh7.png` |
+| **Image 1:** *User Dashboard Home* | ![User Dashboard](README_IMG/anh1.png) |
+| **Image 8:** *Course Enrollment Page (User)* | ![Course Enrollment](README_IMG/anh8.png) |
+| **Image 9:** *My Registered Courses Page (User)* | ![My Courses](README_IMG/anh9.png) |
+| **Image 2:** *Course Management Page (CRUD) (ADMIN)* | ![Course Management](README_IMG/anh2.png) |
+| **Image 3:** *Student Roster Page (ADMIN)* | ![Student Roster](README_IMG/anh3.png) |
+| **Image 4:** *Monthly Revenue Statistics Chart (ADMIN)* | ![Revenue Chart](README_IMG/anh4.png) |
+| **Image 5:** *Edit Student Details Form (ADMIN)* | ![Edit Form](README_IMG/anh5.png) |
+| **Image 6:** *Course Enrollment List (ADMIN)* | ![Enrollment List](README_IMG/anh6.png) |
+| **Image 7:** *Monthly Revenue Statistics Chart (Alternate View) (ADMIN)* | ![Revenue Chart 2](README_IMG/anh7.png) |
+
 
 ## 🛠️ Technology Stack
 
